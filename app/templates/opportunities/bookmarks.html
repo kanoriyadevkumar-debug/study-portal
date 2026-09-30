@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}My bookmarks{% endblock %}
+{% block content %}
+<h1>My bookmarks</h1>
+<div class="list">
+  {% for b in bookmarks %}
+  <div class="list-item">
+    <div>
+      <strong>{{ b.opportunity.title }}</strong>
+      <p class="meta">{{ b.opportunity.company }} &middot; {{ b.opportunity.type }}</p>
+    </div>
+    <form method="POST" action="{{ url_for('opportunities.toggle_bookmark', opp_id=b.opportunity.id) }}">
+      <button class="btn-small" type="submit">Remove</button>
+    </form>
+  </div>
+  {% else %}
+  <p>No bookmarks yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

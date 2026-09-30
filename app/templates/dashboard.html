@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Welcome, {{ current_user.name }}</h1>
+<p class="subtitle">Everything in one place — study material, courses, your resume, and opportunities.</p>
+
+<div class="module-grid">
+  <a class="module-card" href="{{ url_for('materials.list_materials') }}">
+    <h3>Study material</h3>
+    <p>Browse and upload notes, PDFs and resources by subject.</p>
+  </a>
+  <a class="module-card" href="{{ url_for('courses.list_courses') }}">
+    <h3>Courses</h3>
+    <p>Explore structured courses and track your progress.</p>
+  </a>
+  <a class="module-card" href="{{ url_for('resume.build') }}">
+    <h3>Resume builder</h3>
+    <p>Fill in your details and export a polished PDF resume.</p>
+  </a>
+  <a class="module-card" href="{{ url_for('opportunities.list_opportunities') }}">
+    <h3>Opportunities</h3>
+    <p>Browse internships, jobs and hackathons. Bookmark your favorites.</p>
+  </a>
+</div>
+{% endblock %}

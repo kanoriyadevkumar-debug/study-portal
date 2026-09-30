@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Study Portal{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  {% if current_user.is_authenticated %}
+  <nav class="navbar">
+    <a href="{{ url_for('main.dashboard') }}" class="brand">Study Portal</a>
+    <div class="nav-links">
+      <a href="{{ url_for('materials.list_materials') }}">Study material</a>
+      <a href="{{ url_for('courses.list_courses') }}">Courses</a>
+      <a href="{{ url_for('resume.build') }}">Resume builder</a>
+      <a href="{{ url_for('opportunities.list_opportunities') }}">Opportunities</a>
+      <a href="{{ url_for('auth.logout') }}">Log out ({{ current_user.name }})</a>
+    </div>
+  </nav>
+  {% endif %}
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Resume builder{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Resume builder</h1>
+  {% if resume %}
+  <a class="btn" href="{{ url_for('resume.download_pdf') }}">Download PDF</a>
+  {% endif %}
+</div>
+
+<form method="POST" class="resume-form">
+  <label>Full name</label>
+  <input type="text" name="full_name" value="{{ resume.full_name if resume else current_user.name }}">
+
+  <label>Phone</label>
+  <input type="text" name="phone" value="{{ resume.phone if resume else '' }}">
+
+  <label>Education (one entry per line)</label>
+  <textarea name="education" rows="3">{{ resume.education if resume else '' }}</textarea>
+
+  <label>Skills (one per line, or comma separated)</label>
+  <textarea name="skills" rows="3">{{ resume.skills if resume else '' }}</textarea>
+
+  <label>Projects (one per line)</label>
+  <textarea name="projects" rows="4">{{ resume.projects if resume else '' }}</textarea>
+
+  <label>Experience (one entry per line)</label>
+  <textarea name="experience" rows="4">{{ resume.experience if resume else '' }}</textarea>
+
+  <button type="submit">Save resume</button>
+</form>
+{% endblock %}

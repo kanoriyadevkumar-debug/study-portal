@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Add course{% endblock %}
+{% block content %}
+<div class="auth-form">
+  <h2>Add a course</h2>
+  <form method="POST">
+    <input type="text" name="title" placeholder="Course title" required>
+    <textarea name="description" placeholder="Short description" rows="3"></textarea>
+    <textarea name="modules" placeholder="Modules, one per line" rows="5"></textarea>
+    <button type="submit">Create course</button>
+  </form>
+</div>
+{% endblock %}

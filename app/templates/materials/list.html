@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Study material{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Study material</h1>
+  <a class="btn" href="{{ url_for('materials.upload') }}">+ Upload material</a>
+</div>
+
+<form method="GET" class="filter-form">
+  <input type="text" name="subject" placeholder="Filter by subject" value="{{ subject }}">
+  <button type="submit">Filter</button>
+</form>
+
+<div class="list">
+  {% for m in materials %}
+  <div class="list-item">
+    <div>
+      <strong>{{ m.title }}</strong>
+      <p class="meta">{{ m.subject }} {% if m.tags %}&middot; {{ m.tags }}{% endif %} &middot; uploaded by {{ m.uploader.name }}</p>
+    </div>
+    <a class="btn-small" href="{{ url_for('materials.download', material_id=m.id) }}">Download</a>
+  </div>
+  {% else %}
+  <p>No study material yet. Be the first to upload something.</p>
+  {% endfor %}
+</div>
+{% endblock %}

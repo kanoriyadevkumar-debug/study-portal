@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Opportunities{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Opportunities</h1>
+  <a class="btn" href="{{ url_for('opportunities.add') }}">+ Post opportunity</a>
+</div>
+
+<form method="GET" class="filter-form">
+  <select name="type">
+    <option value="">All types</option>
+    <option value="internship" {% if opp_type == 'internship' %}selected{% endif %}>Internship</option>
+    <option value="job" {% if opp_type == 'job' %}selected{% endif %}>Job</option>
+    <option value="hackathon" {% if opp_type == 'hackathon' %}selected{% endif %}>Hackathon</option>
+  </select>
+  <button type="submit">Filter</button>
+  <a href="{{ url_for('opportunities.my_bookmarks') }}">My bookmarks</a>
+</form>
+
+<div class="list">
+  {% for o in opportunities %}
+  <div class="list-item">
+    <div>
+      <strong>{{ o.title }}</strong>
+      <p class="meta">{{ o.company }} &middot; {{ o.type }} &middot; {{ o.location }}
+        {% if o.deadline %}&middot; deadline: {{ o.deadline }}{% endif %}</p>
+      {% if o.link %}<a href="{{ o.link }}" target="_blank">View listing</a>{% endif %}
+    </div>
+    <form method="POST" action="{{ url_for('opportunities.toggle_bookmark', opp_id=o.id) }}">
+      <button class="btn-small" type="submit">
+        {% if o.id in bookmarked_ids %}Bookmarked{% else %}Bookmark{% endif %}
+      </button>
+    </form>
+  </div>
+  {% else %}
+  <p>No opportunities posted yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

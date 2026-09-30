@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Post opportunity{% endblock %}
+{% block content %}
+<div class="auth-form">
+  <h2>Post an opportunity</h2>
+  <form method="POST">
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="text" name="company" placeholder="Company / organizer">
+    <select name="type" required>
+      <option value="">Select type</option>
+      <option value="internship">Internship</option>
+      <option value="job">Job</option>
+      <option value="hackathon">Hackathon</option>
+    </select>
+    <input type="text" name="location" placeholder="Location (or Remote)">
+    <input type="text" name="deadline" placeholder="Deadline (e.g. 30 Sep 2026)">
+    <input type="url" name="link" placeholder="Listing URL">
+    <button type="submit">Post</button>
+  </form>
+</div>
+{% endblock %}

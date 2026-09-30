@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block content %}
+<h1>{{ course.title }}</h1>
+<p>{{ course.description }}</p>
+
+<h3>Modules</h3>
+<ul>
+  {% for module in course.module_list() %}
+  <li>{{ module }}</li>
+  {% else %}
+  <li>No modules added yet.</li>
+  {% endfor %}
+</ul>
+
+{% if enrollment %}
+  <div class="progress-box">
+    <p>Your progress: {{ enrollment.progress }}%</p>
+    <form method="POST" action="{{ url_for('courses.update_progress', course_id=course.id) }}">
+      <input type="number" name="progress" min="0" max="100" value="{{ enrollment.progress }}">
+      <button type="submit">Update progress</button>
+    </form>
+  </div>
+{% else %}
+  <form method="POST" action="{{ url_for('courses.enroll', course_id=course.id) }}">
+    <button class="btn" type="submit">Enroll in this course</button>
+  </form>
+{% endif %}
+{% endblock %}

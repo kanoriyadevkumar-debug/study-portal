@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<div class="auth-form">
+  <h2>Create account</h2>
+  <form method="POST">
+    <input type="text" name="name" placeholder="Full name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password (min 6 characters)" minlength="6" required>
+    <button type="submit">Sign up</button>
+  </form>
+  <p>Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
+</div>
+{% endblock %}
